@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "../Button/Button";
-import NavbarList from "../NavbarList/NavbarList";
+import Button from "../../Components/Button/Button";
+import NavbarList from "../../Components/NavbarList/NavbarList";
 
 const Navbar = () => {
   return (
@@ -28,27 +28,6 @@ const Navbar = () => {
             <NavbarList title="Category" path="/category" />
             <NavbarList title="Contact us" path="/contact" />
             <NavbarList title="About us" path="/about" />
-
-            {/* <li className="nav-item active">
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">
-                Category
-              </Link>
-            </li>
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">
-                Contact us
-              </Link>
-            </li>
-            <li className="nav-item active mr-2">
-              <Link className="nav-link" to="/">
-                About us
-              </Link>
-            </li> */}
             <Button title="Logout" width="w-100" />
           </ul>
         </div>
