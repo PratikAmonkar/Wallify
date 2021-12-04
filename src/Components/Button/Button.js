@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../Styles/Button/Button.css";
 
-const Button = ({ title, width, height, padding, margin }) => {
+const Button = ({ title, width, height, padding, margin, path }) => {
   return (
     <>
       <div className="button_div d-inline-block ">
@@ -10,7 +10,7 @@ const Button = ({ title, width, height, padding, margin }) => {
           <Link
             className={`btn btn-style ${width} ${height} ${margin} ${padding}`}
             type="submit"
-            to="/authentication/signin"
+            to={path}
           >
             {title}
           </Link>

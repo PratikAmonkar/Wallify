@@ -28,7 +28,11 @@ const Navbar = () => {
             <NavbarList title="Category" path="/category" />
             <NavbarList title="Contact us" path="/contact" />
             <NavbarList title="About us" path="/about" />
-            <Button title="Logout" width="w-100" />
+            <Button
+              title="Logout"
+              width="w-100"
+              path="/authentication/logout"
+            />
           </ul>
         </div>
       </nav>
