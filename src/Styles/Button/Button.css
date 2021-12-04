@@ -1,0 +1,17 @@
+.button_div{
+  width: 6rem;
+}
+
+.btn-style {
+  /* width: 5rem;
+  height: 2.3rem; */
+  border-radius: 2rem;
+  color: #fff;
+  background-color: var(--button-backgroud-color);
+}
+
+.btn-style:hover {
+  color: black;
+  background-color: #fff;
+  border: 2px solid var(--button-backgroud-color);
+}
