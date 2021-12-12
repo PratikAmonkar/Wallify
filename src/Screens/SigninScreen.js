@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import signinImg from "../assets/images/undraw_secure_login_pdn4 (1).svg";
 
 const SigninScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch(
+      "http://localhost:5000/api/v1/authenticate/signin",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      }
+    );
+    console.log(await res.json());
+  };
+
   return (
     <>
       <div className="container pt-4">
         <div className=" align-items-center text-center ">
-          <h2 className="mb-0">Create an account</h2>
+          <h2 className="mb-0">Welcome</h2>
         </div>
         <div className="row py-5 mt-lg-4 mt-sm-0 align-items-center">
           <div className="col-lg-5 col-md-12 pr-lg-5 text-center">
@@ -27,6 +49,8 @@ const SigninScreen = () => {
                     placeholder="Email Address"
                     className="form-control bg-white"
                     autocomplete="off"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="input-group col-md-12 col-lg-12 mb-4">
@@ -37,12 +61,29 @@ const SigninScreen = () => {
                     placeholder="Password"
                     className="form-control bg-white"
                     autocomplete="off"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="form-group col-lg-12 mx-auto mb-0 btn-style1">
-                  <button type="button" className="btn btn-primary btn-style1">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-style1"
+                    onClick={handleSubmit}
+                  >
                     Signin
                   </button>
+                </div>
+                <div className="text-center w-100 random mt-3">
+                  <p className="text-muted font-weight-bold">
+                    Don't have an account?{" "}
+                    <Link
+                      className="text-primary ml-2"
+                      to="/authentication/signup"
+                    >
+                      Signup
+                    </Link>
+                  </p>
                 </div>
               </div>
             </form>
