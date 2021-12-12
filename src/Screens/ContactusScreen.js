@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Section/NavbarSection/Navbar";
 import ContactusImg from "../assets/images/undraw_contact_us_-15-o2.svg";
-import Button from "../Components/Button/Button";
+import { Link } from "react-router-dom";
 
 const ContactusScreen = () => {
   return (
@@ -57,7 +57,20 @@ const ContactusScreen = () => {
                     rows="5"
                   ></textarea>
                 </div>
-                <Button title="Submit" margin="ml-2" path="/" width="100" />
+                <div className="button_div d-inline-block ">
+                  <div className="d-flex">
+                    <Link
+                      className={`btn btn-style w-100`}
+                      type="submit"
+                      // to={path}
+                      // onClick={handleSubmit}
+                    >
+                      Submit
+                    </Link>
+                    {/* </form> */}
+                  </div>
+                </div>
+                {/* <FormButton title="Submit" width="w-100" padding="py-2"/> */}
               </div>
             </form>
           </div>
