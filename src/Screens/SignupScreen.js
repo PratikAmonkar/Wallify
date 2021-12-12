@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import signupImg from "../assets/images/undraw_authentication_fsn5.svg";
 
 const SignupScreen = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch(
+      "http://localhost:5000/api/v1/authenticate/signup",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          confirmPassword: confirmPassword,
+        }),
+      }
+    );
+    console.log(await res.json());
+  };
+
   return (
     <>
       <div className="container pt-4">
@@ -27,6 +55,8 @@ const SignupScreen = () => {
                     placeholder="First Name"
                     className="form-control"
                     autoComplete="off"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
                 </div>
                 <div className="input-group col-md-6 col-lg-6 mb-4">
@@ -37,6 +67,8 @@ const SignupScreen = () => {
                     placeholder="Last Name"
                     className="form-control"
                     autoComplete="off"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </div>
                 <div className="input-group col-lg-12 mb-4">
@@ -47,6 +79,8 @@ const SignupScreen = () => {
                     placeholder="Email Address"
                     className="form-control bg-white"
                     autocomplete="off"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="input-group col-md-6 col-lg-6 mb-4">
@@ -57,6 +91,8 @@ const SignupScreen = () => {
                     placeholder="Password"
                     className="form-control bg-white"
                     autocomplete="off"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="input-group col-md-6 col-lg-6 mb-4">
@@ -67,12 +103,29 @@ const SignupScreen = () => {
                     placeholder="Confirm Password"
                     className="form-control bg-white"
                     autocomplete="off"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
                 <div className="form-group col-lg-12 mx-auto mb-0 btn-style1">
-                  <button type="button" className="btn btn-primary btn-style1">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-style1"
+                    onClick={handleSubmit}
+                  >
                     Signup
                   </button>
+                </div>
+                <div className="text-center w-100 random mt-3">
+                  <p className="text-muted font-weight-bold">
+                    Already Registered?{" "}
+                    <Link
+                      className="text-primary ml-2"
+                      to="/authentication/signin"
+                    >
+                      Login
+                    </Link>
+                  </p>
                 </div>
               </div>
             </form>
