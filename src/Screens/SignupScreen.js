@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import signupImg from "../assets/images/undraw_authentication_fsn5.svg";
 
 const SignupScreen = () => {
+  const history = useHistory();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +28,12 @@ const SignupScreen = () => {
         }),
       }
     );
-    console.log(await res.json());
+    const data = await res.json();
+    if (!data) {
+      alert("User not registerd");
+    } else {
+      history.push("/authentication/signin");
+    }
   };
 
   return (

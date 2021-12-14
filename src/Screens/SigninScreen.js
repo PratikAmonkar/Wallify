@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import signinImg from "../assets/images/undraw_secure_login_pdn4 (1).svg";
 
 const SigninScreen = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,7 +22,12 @@ const SigninScreen = () => {
         }),
       }
     );
-    console.log(await res.json());
+    const data = await res.json();
+    if (!data) {
+      alert("User not signin");
+    } else {
+      history.push("/");
+    }
   };
 
   return (
