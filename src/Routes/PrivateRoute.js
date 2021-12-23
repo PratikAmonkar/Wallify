@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 
-export default function PrivateRoute({ component: Component, ...rest }) {
-  const [currentUser] = useState(true);
-
+const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={(props) => {
-        return currentUser ? (
+      render={(props) =>
+        localStorage.getItem("userToken") ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/authentication/signup" />
-        );
-      }}
-    ></Route>
+          <Redirect to="authentication/signin" />
+        )
+      }
+    />
   );
-}
+};
+
+export default PrivateRoute;

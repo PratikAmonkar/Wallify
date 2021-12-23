@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useUser } from "../Contexts/UserContext";
+
 import signinImg from "../assets/images/undraw_secure_login_pdn4 (1).svg";
 
 const SigninScreen = () => {
   const history = useHistory();
+  const { currentUserData, setCurrentUser } = useUser();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      "http://localhost:5000/api/v1/authenticate/signin",
+      "http://localhost:7000/api/v1/authenticate/signin",
       {
         method: "POST",
         headers: {
@@ -23,9 +27,11 @@ const SigninScreen = () => {
       }
     );
     const data = await res.json();
+    console.log(data.token);
     if (!data) {
-      alert("User not signin");
+      history.push("/authentication/signup");
     } else {
+      localStorage.setItem("userToken", data.token);
       history.push("/");
     }
   };
