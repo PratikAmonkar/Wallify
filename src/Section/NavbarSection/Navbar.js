@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "../../Components/Button/Button";
 import NavbarList from "../../Components/NavbarList/NavbarList";
 
 const Navbar = () => {
+  const loggedOutUser = (e) => {
+    e.preventDefault();
+    try {
+      localStorage.removeItem("userToken");
+    } catch (err) {
+      console.log("custom error");
+    }
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light ">
@@ -28,11 +35,17 @@ const Navbar = () => {
             <NavbarList title="Category" path="/category" />
             <NavbarList title="Contact us" path="/contact" />
             <NavbarList title="About us" path="/about" />
-            <Button
-              title="Logout"
-              width="w-100"
-              path="/authentication/logout"
-            />
+            <div className="button_div d-inline-block ml-3">
+              <div className="d-flex" onClick={loggedOutUser}>
+                <Link
+                  className={`btn btn-style w-100`}
+                  type="submit"
+                  to="/authentication/signin"
+                >
+                  Logout
+                </Link>
+              </div>
+            </div>
           </ul>
         </div>
       </nav>

@@ -2,13 +2,8 @@ import React from "react";
 import Navbar from "../Section/NavbarSection/Navbar";
 import ContactusImg from "../assets/images/undraw_contact_us_-15-o2.svg";
 import { Link } from "react-router-dom";
-import { useUser } from "../Contexts/UserContext";
 
 const ContactusScreen = () => {
-  const { currentUserData } = useUser();
-  console.log(currentUserData);
-  const { firstName, lastName, email } = currentUserData;
-
   return (
     <>
       <Navbar />
@@ -32,7 +27,6 @@ const ContactusScreen = () => {
                     placeholder="First Name"
                     className="form-control bg-white"
                     autoComplete="off"
-                    value={firstName}
                   />
                 </div>
                 <div className="input-group col-md-6 col-lg-6 mb-4">
@@ -43,7 +37,6 @@ const ContactusScreen = () => {
                     placeholder="Last Name"
                     className="form-control bg-white"
                     autoComplete="off"
-                    value={lastName}
                   />
                 </div>
                 <div className="input-group col-lg-12 mb-4">
@@ -54,7 +47,6 @@ const ContactusScreen = () => {
                     placeholder="Email Address"
                     className="form-control bg-white"
                     autoComplete="off"
-                    value={email}
                   />
                 </div>
                 <div className="col-md-12 col-lg-12 mb-4 form-group">
@@ -70,15 +62,12 @@ const ContactusScreen = () => {
                     <Link
                       className={`btn btn-style w-100`}
                       type="submit"
-                      // to={path}
-                      // onClick={handleSubmit}
+                      to="/"
                     >
                       Submit
                     </Link>
-                    {/* </form> */}
                   </div>
                 </div>
-                {/* <FormButton title="Submit" width="w-100" padding="py-2"/> */}
               </div>
             </form>
           </div>

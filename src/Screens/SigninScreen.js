@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useUser } from "../Contexts/UserContext";
-
 import signinImg from "../assets/images/undraw_secure_login_pdn4 (1).svg";
 
 const SigninScreen = () => {
   const history = useHistory();
-  const { currentUserData, setCurrentUser } = useUser();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch(
@@ -60,7 +56,7 @@ const SigninScreen = () => {
                     name="email"
                     placeholder="Email Address"
                     className="form-control bg-white"
-                    autocomplete="off"
+                    autoComplete="off"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -72,7 +68,7 @@ const SigninScreen = () => {
                     name="password"
                     placeholder="Password"
                     className="form-control bg-white"
-                    autocomplete="off"
+                    autoComplete="off"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -88,7 +84,13 @@ const SigninScreen = () => {
                 </div>
                 <div className="text-center w-100 random mt-3">
                   <p className="text-muted font-weight-bold">
-                    Don't have an account?{" "}
+                    <Link
+                      className="text-primary ml-2"
+                      to="/authentication/forgot_password/fsdfsdfdfsagfgsdfgdfs"
+                    >
+                      Forgot password ?
+                    </Link>{" "}
+                    or Don't have an account?{" "}
                     <Link
                       className="text-primary ml-2"
                       to="/authentication/signup"
