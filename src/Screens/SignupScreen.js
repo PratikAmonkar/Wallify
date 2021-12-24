@@ -18,7 +18,7 @@ const SignupScreen = () => {
       return alert("Password not match");
     } else {
       const res = await fetch(
-        "http://localhost:7000/api/v1/authenticate/signup",
+        `${process.env.REACT_APP_API_KEY}/authenticate/signup`,
         {
           method: "POST",
           headers: {

@@ -13,7 +13,7 @@ const SigninScreen = () => {
       return alert("Please fill the fields");
     } else {
       const res = await fetch(
-        "http://localhost:7000/api/v1/authenticate/signin",
+        `${process.env.REACT_APP_API_KEY}/authenticate/signin`,
         {
           method: "POST",
           headers: {
