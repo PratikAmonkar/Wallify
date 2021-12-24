@@ -9,26 +9,34 @@ const SigninScreen = () => {
   const [password, setPassword] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      "http://localhost:7000/api/v1/authenticate/signin",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      }
-    );
-    const data = await res.json();
-    console.log(data.token);
-    if (!data) {
-      history.push("/authentication/signup");
+    if (!email || !password) {
+      return alert("Please fill the fields");
     } else {
-      localStorage.setItem("userToken", data.token);
-      history.push("/");
+      const res = await fetch(
+        "http://localhost:7000/api/v1/authenticate/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
+      const data = await res.json();
+      if (data.statusCode === "403") {
+        return alert("Please fill the fields");
+      } else if (data.statusCode === "401") {
+        return alert("failed to signin a user");
+      } else if (data.statusCode === "404") {
+        alert("Email not register");
+        history.push("/authentication/signup");
+      } else {
+        localStorage.setItem("userToken", data.token);
+        history.push("/");
+      }
     }
   };
 

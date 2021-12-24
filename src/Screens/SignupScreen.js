@@ -12,27 +12,39 @@ const SignupScreen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      "http://localhost:5000/api/v1/authenticate/signup",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          confirmPassword: confirmPassword,
-        }),
-      }
-    );
-    const data = await res.json();
-    if (!data) {
-      alert("User not registerd");
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      return alert("Please fill the fields");
+    } else if (password !== confirmPassword) {
+      return alert("Password not match");
     } else {
-      history.push("/authentication/signin");
+      const res = await fetch(
+        "http://localhost:7000/api/v1/authenticate/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+          }),
+        }
+      );
+      const data = await res.json();
+      if (data.statusCode === "403") {
+        return alert("User with this email id already register");
+      } else if (data.statusCode === "404") {
+        return alert("Please fill the fields");
+      } else if (data.statusCode === "401") {
+        return alert("Password not match");
+      } else if (data.statusCode === "425") {
+        return alert("Failed to register");
+      } else {
+        history.push("/authentication/signin");
+      }
     }
   };
 
@@ -84,7 +96,7 @@ const SignupScreen = () => {
                     name="email"
                     placeholder="Email Address"
                     className="form-control bg-white"
-                    autocomplete="off"
+                    autoComplete="off"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -96,7 +108,7 @@ const SignupScreen = () => {
                     name="password"
                     placeholder="Password"
                     className="form-control bg-white"
-                    autocomplete="off"
+                    autoComplete="off"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -108,7 +120,7 @@ const SignupScreen = () => {
                     name="passwordConfirmation"
                     placeholder="Confirm Password"
                     className="form-control bg-white"
-                    autocomplete="off"
+                    autoComplete="off"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
