@@ -8,7 +8,7 @@ const Navbar = () => {
     try {
       localStorage.removeItem("userToken");
     } catch (err) {
-      console.log("custom error");
+      alert("User not logged out");
     }
   };
   return (

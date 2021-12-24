@@ -3,8 +3,6 @@ import React from "react";
 const FormButton = ({ width, height, title, margin, padding }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Hello World");
-    // onSelectData("HelloWorld");
   };
   return (
     <>
